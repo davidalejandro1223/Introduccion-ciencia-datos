@@ -7,20 +7,23 @@ print (mat)
 idO = int(input('Ingrese el primer id \n'))
 idD = int(input('Ingrese el segundo id \n'))
 
-
 def limites(id):
     x=id%3
     y=(id%9)//3
     z=id//9
-    return np.array([z,y,x])
 
-limitesA=limites(idO)
-limitesB=limites(idD)
+    limites = np.array([z,y,x])
+    return limites
 
-tempA = mat[limitesA[0]*3:(limitesA[0]*3)+3, limitesA[1]*3:(limitesA[1]*3)+3, limitesA[2]*3:(limitesA[2]*3)+3]
-tempB = copy.deepcopy(mat[limitesB[0]*3:(limitesB[0]*3)+3, limitesB[1]*3:(limitesB[1]*3)+3, limitesB[2]*3:(limitesB[2]*3)+3])
-# Solo hace la primera linea
-mat[limitesB[0]*3:(limitesB[0]*3)+3, limitesB[1]*3:(limitesB[1]*3)+3, limitesB[2]*3:(limitesB[2]*3)+3] = tempA
-mat[limitesA[0]*3:(limitesA[0]*3)+3, limitesA[1]*3:(limitesA[1]*3)+3, limitesA[2]*3:(limitesA[2]*3)+3] = tempB     
+def mover(limitesA, limitesB):
+    tempA = mat[limitesA[0]*3:(limitesA[0]*3)+3, limitesA[1]*3:(limitesA[1]*3)+3, limitesA[2]*3:(limitesA[2]*3)+3]
+    tempB = copy.deepcopy(mat[limitesB[0]*3:(limitesB[0]*3)+3, limitesB[1]*3:(limitesB[1]*3)+3, limitesB[2]*3:(limitesB[2]*3)+3])
+    mat[limitesB[0]*3:(limitesB[0]*3)+3, limitesB[1]*3:(limitesB[1]*3)+3, limitesB[2]*3:(limitesB[2]*3)+3] = tempA
+    mat[limitesA[0]*3:(limitesA[0]*3)+3, limitesA[1]*3:(limitesA[1]*3)+3, limitesA[2]*3:(limitesA[2]*3)+3] = tempB     
+
+limA=limites(idO)
+limB=limites(idD)
+
+mover(limA, limB)
 
 print(mat)
