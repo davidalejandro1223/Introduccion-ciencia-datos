@@ -8,12 +8,12 @@ print (mat)
 # p = f
 # print(p)
 
-idO = int(input('Ingrese el primer id'))
-idD = int(input('Ingrese el primer id'))
+idO = int(input('Ingrese el primer id \n'))
+idD = int(input('Ingrese el primer id \n'))
 
 
 def limites(id):
-    x=id%9
+    x=id%3
     y=(id%9)//3
     z=id//9
 
@@ -21,13 +21,19 @@ def limites(id):
     return limites
 
 def mover(limitesA, limitesB):
-    temp = mat[limitesA[0]:limitesA[0]+3, limitesA[1]:limitesA[1]+3, limitesA[2]:limitesA[2]+3]
-    mat[limitesA[0]:limitesA[0]+3, limitesA[1]:limitesA[1]+3, limitesA[2]:limitesA[2]+3] = mat[limitesB[0]:limitesB[0]+3, limitesB[1]:limitesB[1]+3, limitesB[2]:limitesB[2]+3]
-    mat[limitesB[0]:limitesB[0]+3, limitesB[1]:limitesB[1]+3, limitesB[2]:limitesB[2]+3] = temp
-
+    tempA = mat[limitesA[0]*3:(limitesA[0]*3)+3, limitesA[1]*3:(limitesA[1]*3)+3, limitesA[2]*3:(limitesA[2]*3)+3]
+    print(tempA)
+    tempB = mat[limitesB[0]*3:(limitesB[0]*3)+3, limitesB[1]*3:(limitesB[1]*3)+3, limitesB[2]*3:(limitesB[2]*3)+3]
+    print(tempB)
+    # Solo hace la primera linea
+    mat[limitesB[0]*3:(limitesB[0]*3)+3, limitesB[1]*3:(limitesB[1]*3)+3, limitesB[2]*3:(limitesB[2]*3)+3] = tempA
+    mat[limitesA[0]*3:(limitesA[0]*3)+3, limitesA[1]*3:(limitesA[1]*3)+3, limitesA[2]*3:(limitesA[2]*3)+3] = tempB     
 
 limA=limites(idO)
 limB=limites(idD)
+print(limA)
+print(limB)
+
 mover(limA, limB)
 
 print(mat)
