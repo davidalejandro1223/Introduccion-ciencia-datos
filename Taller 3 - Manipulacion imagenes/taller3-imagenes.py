@@ -1,5 +1,4 @@
 from matplotlib.pyplot import imread, imsave, imshow
-
 import numpy as np
 
 imagen = imread(fname="imagen.png")
@@ -14,7 +13,6 @@ mascara = np.full((3,3), 1/9)
 print('La mascara de difuminado es \n', mascara)
 
 sizeImg = imagen.shape
-
 for i in range (1, sizeImg[0]-2):
     for j in range(1,sizeImg[1]-2):
         temp = imagen[i:i+3, j:j+3]*mascara
