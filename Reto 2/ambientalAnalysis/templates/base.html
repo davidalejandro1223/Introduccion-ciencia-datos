@@ -26,7 +26,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Inicio</a>
+                    <a class="nav-item nav-link" href="{% url 'analiticas:home' %}">Inicio</a>
                     <a class="nav-item nav-link" href="#">Menciones</a>
                     <a class="nav-item nav-link" href="#">Palabras clave individual</a>
                     <a class="nav-item nav-link" href="#">Palabras clave conjunto</a>
@@ -44,13 +44,13 @@
         <div class="container-fluid">
             <div class="row bg-success py-3">
                 <div class="col-12 col-md-6">
-                    <h3 class="text-white">Presentado por:</h3>
+                    <h3 class="text-white">Introduccion a la ciencia de datos</h3>
+                    <h4 class="text-white">Presentado por:</h4>
                     <p class="text-white">
                         David Alejandro Aparicio Grandas - 20151020060 
                         <br> 
                         Norbey Danilo Muñoz - 20151020050
                     </p>
-                    <h4 class="text-white">Introduccion a la ciencia de datos</h4>
                 </div>
                 <div class="col-12 col-md-6 text-center">
                     <img src="{% static 'img/logo.jpg' %}" class="img-fluid logo rounded">

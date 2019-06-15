@@ -1,7 +1,7 @@
 import tweepy
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Hashtags, Usuarios
 # Create your views here.
 
 def autenticacion():
@@ -17,6 +17,17 @@ def autenticacion():
 
 def home(request):
     return render(request, 'analiticas/index.html', context=None)
+
+def analitica1(request):
+    usuarios = Usuarios.objects.all()
+    hashtags = Hashtags.objects.all()
+
+    context = {
+        'usuarios': usuarios,
+        'hashtags': hashtags,
+    }
+        
+    return render(request, 'analiticas/analitica1.html', context=context)
 
 def conexion(request):
     api = autenticacion()
