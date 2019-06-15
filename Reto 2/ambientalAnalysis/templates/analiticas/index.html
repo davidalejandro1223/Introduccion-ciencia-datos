@@ -2,32 +2,62 @@
 {% load static %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'analiticas/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'analiticas/css/styles.css' %}">
 {% endblock styles %}
 
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mt-5 text-center">
-                <h3>Escoja una de las siguientes analiticas disponibles</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-6 mt-5">
-                <h4>Numero de menciones de un usuario o hashtag en el tiempo</h4>
-            </div>
-            <div class="col-12 col-md-6 mt-5">
-                <h4>Numero de veces que una determinada palabra ha sido usada por los usuarios definidos</h4>
-            </div>
-            <div class="col-12 col-md-6 mt-5">
-                <h4></h4>
-            </div>
-            <div class="col-12 col-md-6 mt-5">
-                <h4></h4>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Escoja una de las siguientes analiticas disponibles</h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12 col-md-6 mt-5 text-center mx-auto">
+            <a href="" class="justify-content-center d-flex">
+                <div class="card text-white bg-success" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Numero de menciones de un usuario o hashtag en el tiempo</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 mt-5 text-center">
+            <a href="" class="justify-content-center d-flex">
+                <div class="card text-white bg-success" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Numero de veces que una determinada palabra ha sido usada por los usuarios
+                            definidos en el tiempo</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 mt-5 text-center">
+            <a href="" class="justify-content-center d-flex">
+                <div class="card text-white bg-success" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Participacion de los usuarios definidos sobre una palabra clave determinada
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 mt-5 text-center">
+            <a href="" class="justify-content-center d-flex">
+                <div class="card text-white bg-success" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Participacion de los candidatos a la alcaldía de bogota sobre una palabra
+                            clave
+                            determinada</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
-    
-    

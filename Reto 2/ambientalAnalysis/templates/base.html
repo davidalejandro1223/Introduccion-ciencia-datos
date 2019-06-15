@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
     {% block styles %}
 
@@ -17,7 +18,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success position-sticky mb-5">
             <a class="navbar-brand" href="#">Analiticas Ambientales</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,8 +40,23 @@
 
     {% endblock content %}
 
-    <footer>
-
+    <footer class="mt-5">
+        <div class="container-fluid">
+            <div class="row bg-success py-3">
+                <div class="col-12 col-md-6">
+                    <h3 class="text-white">Presentado por:</h3>
+                    <p class="text-white">
+                        David Alejandro Aparicio Grandas - 20151020060 
+                        <br> 
+                        Norbey Danilo Muñoz - 20151020050
+                    </p>
+                    <h4 class="text-white">Introduccion a la ciencia de datos</h4>
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <img src="{% static 'img/logo.jpg' %}" class="img-fluid logo rounded">
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
