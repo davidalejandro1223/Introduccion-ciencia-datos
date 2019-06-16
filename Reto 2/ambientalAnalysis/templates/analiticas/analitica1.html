@@ -41,4 +41,18 @@
         <button type="submit" class="btn btn-success">Enviar</button>
     </form>
 </div>
+
+
+{% if image_base64 %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                    <img src="data:image/png;base64,{{image_base64}}" alt="grafica de linea" width=100% height=auto class="img-fluid"/>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+    
 {% endblock content %}

@@ -44,4 +44,34 @@
         <button type="submit" class="btn btn-success">Enviar</button>
     </form>
 </div>
+
+{% if image_base64 %}
+<section>
+    <div class="container">
+        <div class="row">
+            {% if image_base64.image_base641 %}
+            <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base641}}" alt="grafica de pie" width=100% height=auto class="img-fluid"/>
+            </div>
+            {% endif %}
+            {% if image_base64.image_base642 %}
+            <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base642}}" alt="grafica de pie" width=100% height=auto class="img-fluid"/>
+            </div>
+            {% endif %}
+            {% if image_base64.image_base643 %}
+            <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base643}}" alt="grafica de pie" width=100% height=auto class="img-fluid"/>
+            </div>
+            {% endif %}
+            {% if image_base64.image_base644 %}
+            <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base644}}" alt="grafica de pie" width=100% height=auto class="img-fluid"/>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
 {% endblock content %}

@@ -11,24 +11,15 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-center">Frecuencia uso de una palabra clave por un usuario</h2>
+            <h2 class="text-center">Frecuencia uso de una palabra clave por candidato a la alcaldia a bogotá</h2>
             <p>Ingrese hasta 4 palabras clave para ver de manera grafica la participacion de los candidatos a la
-               de bogotá en el uso de estas palabras en sus determinados tweeets
+                alcadía de bogotá en el uso de estas palabras en sus determinados tweets
             </p>
         </div>
     </div>
     <form method="POST">
         {% csrf_token %}
         <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="Usuarios">Seleccione un candidato</label>
-                <select class="custom-select mr-sm-2" id="Usuarios" name="usuario">
-                    <option selected>Escoja uno</option>
-                    {% for candidato in candidatos %}
-                    <option value="{{candidato.arroba}}">{{candidato.nombre_cuenta}}</option>
-                    {% endfor %}
-                </select>
-            </div>
             <div class="form-group col-md-3">
                 <label for="palabra-clave1">Escriba una palabra clave</label>
                 <input type="text" name="palabra1" class="form-control" placeholder="Palabra clave 1"
@@ -52,5 +43,38 @@
         </div>
         <button type="submit" class="btn btn-success">Enviar</button>
     </form>
+
+    {% if image_base64 %}
+    <section>
+        <div class="container">
+            <div class="row">
+                {% if image_base64.image_base641 %}
+                <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base641}}" alt="grafica de pie" width=100%
+                        height=auto class="img-fluid" />
+                </div>
+                {% endif %}
+                {% if image_base64.image_base642 %}
+                <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base642}}" alt="grafica de pie" width=100%
+                        height=auto class="img-fluid" />
+                </div>
+                {% endif %}
+                {% if image_base64.image_base643 %}
+                <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base643}}" alt="grafica de pie" width=100%
+                        height=auto class="img-fluid" />
+                </div>
+                {% endif %}
+                {% if image_base64.image_base644 %}
+                <div class="col-6">
+                    <img src="data:image/png;base64,{{image_base64.image_base644}}" alt="grafica de pie" width=100%
+                        height=auto class="img-fluid" />
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
 </div>
 {% endblock content %}
