@@ -2,17 +2,26 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'analiticas/styles.css' %}">
+<link rel="stylesheet" href="{% static 'analiticas/css/styles.css' %}">
 {% endblock styles %}
 
 
 {% block content %}
 <div class="container">
-    <form>
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center">Menciones de un usuario o hashtag</h2>
+            <p>Si selecciona alguno de los usuarios o hashtags y el otro queda sin seleccion, se creara un
+                histograma con la cantidad de menciones de la seleccion en un tiempo determinado
+            </p>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %} 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="Usuarios">Seleccione un usuario</label>
-                <select class="custom-select mr-sm-2" id="Usuarios">
+                <select class="custom-select mr-sm-2" id="Usuarios" name="usuario">
                     <option selected>Escoja uno</option>
                     {% for usuario in usuarios %}
                     <option value="{{usuario.arroba}}">{{usuario.nombre_cuenta}}</option>
@@ -20,8 +29,8 @@
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="Usuarios">Seleccione un Hashtag</label>
-                <select class="custom-select mr-sm-2" id="Usuarios">
+                <label for="hashtags">Seleccione un Hashtag</label>
+                <select class="custom-select mr-sm-2" id="hashtags" name="hashtag">
                     <option selected>Escoja uno</option>
                     {% for hashtag in hashtags %}
                     <option value="{{hashtag.hashtag}}">#{{hashtag.hashtag}}</option>
@@ -29,7 +38,7 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-success">Enviar</button>
     </form>
 </div>
 {% endblock content %}

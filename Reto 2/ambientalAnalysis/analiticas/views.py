@@ -26,8 +26,34 @@ def analitica1(request):
         'usuarios': usuarios,
         'hashtags': hashtags,
     }
+
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        hashtag = request.POST.get('hashtag')
+
+        print (usuario, hashtag)
         
     return render(request, 'analiticas/analitica1.html', context=context)
+
+def analitica2(request):
+    usuarios = Usuarios.objects.all()
+
+    context = {
+        'usuarios': usuarios
+    } 
+
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        palabra1 = request.POST.get('palabra1')
+        palabra2 = request.POST.get('palabra2')
+        palabra3 = request.POST.get('palabra3')
+        palabra4 = request.POST.get('palabra4')
+
+        print(usuario, palabra1, palabra2, palabra3, palabra4)
+    
+    return render(request, 'analiticas/analitica2.html', context=context)
+    
+
 
 def conexion(request):
     api = autenticacion()
