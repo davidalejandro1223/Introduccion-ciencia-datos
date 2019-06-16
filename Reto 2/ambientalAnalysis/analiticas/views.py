@@ -1,7 +1,7 @@
 import tweepy
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Hashtags, Usuarios
+from .models import Hashtags, Usuarios, Candidatos
 # Create your views here.
 
 def autenticacion():
@@ -53,6 +53,38 @@ def analitica2(request):
     
     return render(request, 'analiticas/analitica2.html', context=context)
     
+def analitica3(request):
+    context = {
+
+    }
+
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        palabra1 = request.POST.get('palabra1')
+        palabra2 = request.POST.get('palabra2')
+        palabra3 = request.POST.get('palabra3')
+        palabra4 = request.POST.get('palabra4')
+
+        print(usuario, palabra1, palabra2, palabra3, palabra4)
+
+    return render(request, 'analiticas/analitica3.html', context=context)
+
+def analitica4(request):
+    candidatos = Candidatos.objects.all()
+    context = {
+        'candidatos': candidatos
+    }
+    
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        palabra1 = request.POST.get('palabra1')
+        palabra2 = request.POST.get('palabra2')
+        palabra3 = request.POST.get('palabra3')
+        palabra4 = request.POST.get('palabra4')
+
+        print(usuario, palabra1, palabra2, palabra3, palabra4)
+    
+    return render(request, 'analiticas/analitica4.html', context=context)
 
 
 def conexion(request):

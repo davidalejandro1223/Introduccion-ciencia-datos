@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuarios, Hashtags
+from .models import Usuarios, Hashtags, Candidatos
 
 # Register your models here.
 
@@ -11,3 +11,7 @@ class AdminUsuarios(admin.ModelAdmin):
 @admin.register(Hashtags)
 class AdminHashtags(admin.ModelAdmin):
     list_display = ('id', 'hashtag')
+
+@admin.register(Candidatos)
+class AdminCandidatos(admin.ModelAdmin):
+    list_display = ('id', 'arroba', 'nombre_cuenta')
