@@ -67,21 +67,21 @@ def analitica1(request):
             buf.close()
             context.update({'image_base641':image_base641})
 
-            # # plot data SCATTER
-            # fig, ax = plt.subplots(figsize=(15,7))
-            # # use unstack()
-            # dff = df1.groupby(['User'])['Hashtag'].value_counts()
-            # dff = dff.reset_index(name='Cantidad')
-            # dff.fillna(0, inplace=True)
-            # names = dff['User']
-            # values = dff['Hashtag']
-            # plt.scatter(names, values, c=dff['Cantidad'], s=(dff['Cantidad']*100))
-            # plt.colorbar()
-            # buf = BytesIO()
-            # plt.savefig(buf, format='png', dpi=300)
-            # image_base642 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
-            # buf.close()
-            # context.update({'image_base642':image_base642})
+            # plot data SCATTER
+            fig, ax = plt.subplots(figsize=(15,7))
+            # use unstack()
+            dff = df1.groupby(['User'])['Hashtag'].value_counts()
+            dff = dff.reset_index(name='Cantidad')
+            dff.fillna(0, inplace=True)
+            names = dff['User']
+            values = dff['Hashtag']
+            plt.scatter(names, values, c=dff['Cantidad'], s=(dff['Cantidad']*100))
+            plt.colorbar()
+            buf = BytesIO()
+            plt.savefig(buf, format='png', dpi=300)
+            image_base642 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+            buf.close()
+            context.update({'image_base642':image_base642})
 
         elif hashtag=='Escoja uno':
             list_of_tweets = []
@@ -149,21 +149,109 @@ def analitica1(request):
     return render(request, 'analiticas/analitica1.html', context=context)
 
 def analitica2(request):
+    api = autenticacion()
+    image_base64 = {}
+    context = {
+        'image_base64':image_base64
+    }
     usuarios = Usuarios.objects.all()
 
-    context = {
-        'usuarios': usuarios
-    } 
-
     if request.method == 'POST':
-        usuario = request.POST.get('usuario')
         palabra1 = request.POST.get('palabra1')
         palabra2 = request.POST.get('palabra2')
         palabra3 = request.POST.get('palabra3')
         palabra4 = request.POST.get('palabra4')
 
-        print(usuario, palabra1, palabra2, palabra3, palabra4)
-    
+        if palabra1 != "":
+            list_of_tweets = []
+            for i in usuarios:
+                consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(palabra1)).items()
+                for tweet in consul:
+                    dict_ = {'User': tweet.user.name,
+                            'User_Name': tweet.user.screen_name,
+                            'Text': tweet.text,
+                            'Palabra': palabra1,
+                            'Favoritos': tweet.favorite_count,
+                            'Retuits': tweet.retweet_count
+                            }
+                    list_of_tweets.append(dict_)
+                    df6 = pd.DataFrame(list_of_tweets, columns=['User', 'User_Name', 'Text', 'Palabra', 'Favoritos', 'Retuits'])
+                    df6['Interacciones'] = df6.apply(lambda x: x['Favoritos'] + x['Retuits'], axis=1)
+                    fig, axes = plt.subplots(figsize=(20, 10))
+                    df6.groupby('User')['Interacciones'].sum().plot(kind='bar', ax=axes)
+                    buf = BytesIO()
+                    plt.savefig(buf, format='png', dpi=300)
+                    image_base641 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+                    buf.close()
+                    image_base64.update({'image_base641':image_base641})
+
+        if palabra2 != "":
+            list_of_tweets = []
+            for i in usuarios:
+                consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(palabra2)).items()
+                for tweet in consul:
+                    dict_ = {'User': tweet.user.name,
+                            'User_Name': tweet.user.screen_name,
+                            'Text': tweet.text,
+                            'Palabra': palabra2,
+                            'Favoritos': tweet.favorite_count,
+                            'Retuits': tweet.retweet_count
+                            }
+                    list_of_tweets.append(dict_)
+                    df6 = pd.DataFrame(list_of_tweets, columns=['User', 'User_Name', 'Text', 'Palabra', 'Favoritos', 'Retuits'])
+                    df6['Interacciones'] = df6.apply(lambda x: x['Favoritos'] + x['Retuits'], axis=1)
+                    fig, axes = plt.subplots(figsize=(20, 10))
+                    df6.groupby('User')['Interacciones'].sum().plot(kind='bar', ax=axes)
+                    buf = BytesIO()
+                    plt.savefig(buf, format='png', dpi=300)
+                    image_base642 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+                    buf.close()
+                    image_base64.update({'image_base642':image_base642})
+        if palabra3 != "":
+            list_of_tweets = []
+            for i in usuarios:
+                consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(palabra3)).items()
+                for tweet in consul:
+                    dict_ = {'User': tweet.user.name,
+                            'User_Name': tweet.user.screen_name,
+                            'Text': tweet.text,
+                            'Palabra': palabra3,
+                            'Favoritos': tweet.favorite_count,
+                            'Retuits': tweet.retweet_count
+                            }
+                    list_of_tweets.append(dict_)
+                    df6 = pd.DataFrame(list_of_tweets, columns=['User', 'User_Name', 'Text', 'Palabra', 'Favoritos', 'Retuits'])
+                    df6['Interacciones'] = df6.apply(lambda x: x['Favoritos'] + x['Retuits'], axis=1)
+                    fig, axes = plt.subplots(figsize=(20, 10))
+                    df6.groupby('User')['Interacciones'].sum().plot(kind='bar', ax=axes)
+                    buf = BytesIO()
+                    plt.savefig(buf, format='png', dpi=300)
+                    image_base643 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+                    buf.close()
+                    image_base64.update({'image_base643':image_base643})
+        if palabra4 != "":
+            list_of_tweets = []
+            for i in usuarios:
+                consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(palabra4)).items()
+                for tweet in consul:
+                    dict_ = {'User': tweet.user.name,
+                            'User_Name': tweet.user.screen_name,
+                            'Text': tweet.text,
+                            'Palabra': palabra4,
+                            'Favoritos': tweet.favorite_count,
+                            'Retuits': tweet.retweet_count
+                            }
+                    list_of_tweets.append(dict_)
+                    df6 = pd.DataFrame(list_of_tweets, columns=['User', 'User_Name', 'Text', 'Palabra', 'Favoritos', 'Retuits'])
+                    df6['Interacciones'] = df6.apply(lambda x: x['Favoritos'] + x['Retuits'], axis=1)
+                    fig, axes = plt.subplots(figsize=(20, 10))
+                    df6.groupby('User')['Interacciones'].sum().plot(kind='bar', ax=axes)
+                    buf = BytesIO()
+                    plt.savefig(buf, format='png', dpi=300)
+                    image_base644 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+                    buf.close()
+                    image_base64.update({'image_base644':image_base644})
+
     return render(request, 'analiticas/analitica2.html', context=context)
     
 def analitica3(request):
