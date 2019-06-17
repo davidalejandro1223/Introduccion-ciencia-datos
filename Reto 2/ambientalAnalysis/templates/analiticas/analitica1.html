@@ -73,4 +73,34 @@
 </section>
 {% endif %}
 
+<section>
+    <div class="container">
+    {% if not mean.empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    {% for column in mean.columns %}
+                    <th scope="col">{{column}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for valores in mean.to_numpy %}    
+                <tr>
+                    
+                    {% for val in valores %}
+                    <td scope="row">{{val}}</td>
+                    {% endfor %}
+                        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    {% endif %}        
+    {% if moda %}
+        <h4>El usuario mas participativo para el hashtag '#{{hashtag}}'' es '{{moda}}'</h4>
+    {% endif %}
+    </div> 
+</section>
+
 {% endblock content %}

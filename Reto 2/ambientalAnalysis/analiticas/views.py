@@ -10,6 +10,8 @@ import json
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+import statistics as st
+from collections import Counter
 # Create your views here.
 
 def autenticacion():
@@ -142,7 +144,54 @@ def analitica1(request):
             buf.close()
             #fig.show()
             context.update({'image_base64':image_base64})
+
+            df12 = df4
+            df12['Date'] = df12['Date'].astype(str).str[:10]
+            list_ = []
+            siz = df12.shape[0]
+            
+            for i in range(0, siz):
+                list_.append(df12['User_Name'][i])
+            context.update({'moda':st.mode(list_), 'hashtag':hashtag})
         
+        list_of_tweets = []
+        c=0
+        for i in usuarios:
+            consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)).items()
+            for tweet in consul:
+                dict_ = {'User': tweet.user.name,
+                        'User_Name': tweet.user.screen_name,
+                        'Date': tweet.created_at,
+                        'Text': tweet.text
+                        }
+                list_of_tweets.append(dict_)
+        df9 = pd.DataFrame(list_of_tweets, columns=['User', 'User_Name', 'Date', 'Text'])
+        df10 = df9
+        df10['Date'] = df10['Date'].astype(str).str[:10]
+        df10 = df10.groupby(['User'])['Date'].value_counts()
+        df10 = df10.reset_index(name='Cantidad_1')
+        nam = np.array(df10['User'].unique())
+        df10 = df9
+        df10['Date'] = df10['Date'].astype(str).str[:10]
+        df10 = df10.groupby(['User'])['Date'].value_counts()
+        df10 = df10.reset_index(name='Cantidad_1')
+        nam = np.array(df10['User'].unique())
+        list_mean = []
+        for i in nam:
+            val = np.array(df10['Cantidad_1'][df10['User']==str(i)])
+            dict_ = {'User': i,
+                    'Tuit_Dia': st.mean(val),
+                    'Tuit_Mediana': st.median(val),
+                    'Tuit_Mediana_Ag': st.median_grouped(val),
+                    'Varianza': st.pvariance(val),
+                    'Desviacion': np.std(val)
+                    }
+            list_mean.append(dict_)
+            
+        df11 = pd.DataFrame(list_mean, columns=['User', 'Tuit_Dia', 'Tuit_Mediana', 'Tuit_Mediana_Ag', 'Varianza', 'Desviacion'])
+        context.update({'mean': df11})
+        
+
 
 
             
