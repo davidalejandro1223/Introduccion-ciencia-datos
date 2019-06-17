@@ -41,7 +41,49 @@ def analitica1(request):
         usuario = request.POST.get('usuario')
         hashtag = request.POST.get('hashtag')
 
-        if hashtag=='Escoja uno':
+        if usuario == 'Escoja uno' and hashtag=='Escoja uno':
+            list_of_tweets = []
+            for i in usuarios:
+                for j in hashtags:
+                    consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(j.hashtag)).items()
+                    for tweet in consul:
+                        dict_ = {'User': tweet.user.name,
+                                'User_Name': tweet.user.screen_name,
+                                'Text': tweet.text,
+                                'Hashtag': j.hashtag
+                                }
+                        list_of_tweets.append(dict_)
+                
+            df1 = pd.DataFrame(list_of_tweets, columns=['User', 'User_Name', 'Text', 'Hashtag'])
+            # plot data
+            fig, ax = plt.subplots(figsize=(15,7))
+            # use unstack()
+            dff = df1.groupby(['User'])['Hashtag'].value_counts().unstack()
+            dff.fillna(0, inplace=True)
+            dff.plot(ax=ax)
+            buf = BytesIO()
+            plt.savefig(buf, format='png', dpi=300)
+            image_base641 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+            buf.close()
+            context.update({'image_base641':image_base641})
+
+            # # plot data SCATTER
+            # fig, ax = plt.subplots(figsize=(15,7))
+            # # use unstack()
+            # dff = df1.groupby(['User'])['Hashtag'].value_counts()
+            # dff = dff.reset_index(name='Cantidad')
+            # dff.fillna(0, inplace=True)
+            # names = dff['User']
+            # values = dff['Hashtag']
+            # plt.scatter(names, values, c=dff['Cantidad'], s=(dff['Cantidad']*100))
+            # plt.colorbar()
+            # buf = BytesIO()
+            # plt.savefig(buf, format='png', dpi=300)
+            # image_base642 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+            # buf.close()
+            # context.update({'image_base642':image_base642})
+
+        elif hashtag=='Escoja uno':
             list_of_tweets = []
             c=0
             consul = tweepy.Cursor(api.search, q='to:'+str(usuario)+' @'+str(usuario)).items()
@@ -71,7 +113,7 @@ def analitica1(request):
             #fig.show()
             context.update({'image_base64':image_base64})
 
-        if usuario == 'Escoja uno':
+        elif usuario == 'Escoja uno':
             list_of_tweets = []
             c=0
             consul = tweepy.Cursor(api.search, q='#'+str(hashtag), geocode="4.6097100,-74.0817500,500km").items()
@@ -101,6 +143,9 @@ def analitica1(request):
             #fig.show()
             context.update({'image_base64':image_base64})
         
+
+
+            
     return render(request, 'analiticas/analitica1.html', context=context)
 
 def analitica2(request):

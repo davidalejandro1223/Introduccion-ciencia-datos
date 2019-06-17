@@ -17,7 +17,7 @@
         </div>
     </div>
     <form method="POST">
-        {% csrf_token %} 
+        {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="Usuarios">Seleccione un usuario</label>
@@ -48,11 +48,29 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                    <img src="data:image/png;base64,{{image_base64}}" alt="grafica de linea" width=100% height=auto class="img-fluid"/>
+                <img src="data:image/png;base64,{{image_base64}}" alt="grafica de linea" width=100% height=auto
+                    class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</section>
+{% elif image_base641 %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img src="data:image/png;base64,{{image_base641}}" alt="grafica de linea" width=100% height=auto
+                    class="img-fluid" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <img src="data:image/png;base64,{{image_base642}}" alt="grafica de linea" width=100% height=auto
+                    class="img-fluid" />
             </div>
         </div>
     </div>
 </section>
 {% endif %}
-    
+
 {% endblock content %}
