@@ -15,6 +15,10 @@ from collections import Counter
 # Create your views here.
 
 def autenticacion():
+    # consumer_key = 'stKuSL7WMShoaR0Se9fwHIkjW'
+    # consumer_secret = 'aIvT6hm6GqxaW0BfPe0VUZcwJJEHDebIawU9N9B8KGAckiog1Q'
+    # access_token = '293588703-08HTWRdhrTGkI4zjdlApfsy8tmPsqrGeigDubOqf'
+    # access_token_secret = 'Pvkfl4zA5RsGo8uBbX2GKHxEUnRKR01kYGh7IQVj805sv'
     consumer_key = 'stKuSL7WMShoaR0Se9fwHIkjW'
     consumer_secret = 'aIvT6hm6GqxaW0BfPe0VUZcwJJEHDebIawU9N9B8KGAckiog1Q'
     access_token = '293588703-08HTWRdhrTGkI4zjdlApfsy8tmPsqrGeigDubOqf'
@@ -47,7 +51,8 @@ def analitica1(request):
             list_of_tweets = []
             for i in usuarios:
                 for j in hashtags:
-                    consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(j.hashtag)).items()
+                    consul = tweepy.Cursor(api.search, q='from:'+str(i.arroba)+' '+str(j.hashtag)).items(5)
+                    print(consul)
                     for tweet in consul:
                         dict_ = {'User': tweet.user.name,
                                 'User_Name': tweet.user.screen_name,
