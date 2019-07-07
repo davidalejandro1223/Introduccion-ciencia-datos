@@ -37,7 +37,7 @@ y_test
 
 knn.predict(x_test[2:3][:4])
 y_test[2:3][:4]
-
+pr = x_test[2:3][:4]
 
 from sklearn.neighbors import RadiusNeighborsClassifier
 
