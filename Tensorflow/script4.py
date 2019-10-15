@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import cv2
 
 emotion_dict = {0: "Enojado", 1: "Disgustado", 2: "Temeroso", 3: "Feliz", 4: "Triste", 5: "Sorpresa", 6: "Neutral"}
